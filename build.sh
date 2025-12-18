@@ -1,5 +1,8 @@
 #!/bin/bash
+set -e
 
-echo "Building Docker image..."
-docker build -t h4meed/react-app:latest .
-echo "Docker image built successfully."
+docker build -t hamsab31/dev:latest .
+
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+docker push hamsab31/dev:latest
