@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-
-docker build -t hamsab31/dev:latest .
-
+docker build -t h4meed/dev:latest .
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-docker push hamsab31/dev:latest
+docker push h4meed/dev:latest
