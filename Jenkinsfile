@@ -15,12 +15,6 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t $DEV_IMAGE:latest .'
-            }
-        }
-
         stage('Docker Login') {
             steps {
                 withCredentials([usernamePassword(
@@ -32,6 +26,12 @@ pipeline {
                       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                     '''
                 }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $DEV_IMAGE:latest .'
             }
         }
 
