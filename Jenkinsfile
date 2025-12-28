@@ -11,6 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
+                sh 'echo "Branch = $GIT_BRANCH"'
             }
         }
 
@@ -36,7 +37,7 @@ pipeline {
 
         stage('Push to DEV Repo') {
             when {
-                branch 'dev'
+                expression { env.GIT_BRANCH == 'origin/dev' }
             }
             steps {
                 sh 'docker push $DEV_IMAGE:latest'
@@ -45,7 +46,7 @@ pipeline {
 
         stage('Push to PROD Repo') {
             when {
-                branch 'master'
+                expression { env.GIT_BRANCH == 'origin/master' }
             }
             steps {
                 sh '''
